@@ -83,9 +83,6 @@ function HelloController($log, $scope) {
   function getbase64Image() {
     return new Promise(function (resolve, reject) {
       convertToDataUrl('https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Google_2015_logo.svg/1200px-Google_2015_logo.svg.png', function (base64Image) {
-        //console.log('COnverted Image', base64Image);
-        // provide the image at the global scope
-        //this.base64ConvertedImage = base64Image;
         resolve(base64Image);
       })
     })
