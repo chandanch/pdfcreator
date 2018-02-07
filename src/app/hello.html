@@ -1,0 +1,76 @@
+<div class="container-fluid">
+    <br>
+    <h3 style="text-align:center; color: #0f35e0">JavaScript frameworks</h3>
+    <ul class="list-group">
+        <li class="list-group-item">
+            <h5>AngularJS</h5>
+            <p>
+                <b>Created Date</b> 12-03-2011</p>
+            <p>
+                <b>Creator</b> Google</p>
+            <p>
+                <b>Open Source?</b> Yes</p>
+        </li>
+        <li class="list-group-item">
+            <h5>Vue.js</h5>
+            <p>
+                <b>Created Date</b> 12-03-2016</p>
+            <p>
+                <b>Creator</b> Lin Chin</p>
+            <p>
+                <b>Open Source?</b> Yes</p>
+        </li>
+        <li class="list-group-item">
+            <h5>Angular</h5>
+            <p>
+                <b>Created Date</b> 12-03-2016</p>
+            <p>
+                <b>Creator</b> Google</p>
+            <p>
+                <b>Open Source?</b> Yes</p>
+        </li>
+        <li class="list-group-item">
+            <h5>React.js</h5>
+            <p>
+                <b>Created Date</b> 12-03-2013</p>
+            <p>
+                <b>Creator</b>Facebook</p>
+            <p>
+                <b>Open Source?</b> Yes</p>
+        </li>
+        <li class="list-group-item">
+            <h5>Moustache JS</h5>
+            <p>
+                <b>Created Date</b> 12-03-2015</p>
+            <p>
+                <b>Creator</b> Nick minor</p>
+            <p>
+                <b>Open Source?</b> Yes</p>
+        </li>
+    </ul>
+    <br>
+    <div style="text-align:center;">
+        <button type="button" class="btn btn-primary" ng-click="$ctrl.open()">View PDF</button>
+        <button type="button" class="btn btn-success" ng-click="$ctrl.download()">Download PDF</button>
+    </div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="download-notification-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Document Download</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Document Downloaded as PDF successfully!
+            </div>
+            <!-- <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div> -->
+        </div>
+    </div>
+</div>
