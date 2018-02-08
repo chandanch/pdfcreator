@@ -8,18 +8,31 @@ function HelloController($log, $scope) {
   this.ff = 'ff';
   $scope.baser = 'dddd';
   var docDefinition;
-  getbase64Image().then(
-    base64Image => {
-      $log.log('Obtained data', base64Image)
-      constructPDFData(base64Image);
-    }
-  )
+  var imageUrl = [
+    'https://www.w3schools.com/angular/pic_angular.jpg', 
+    'https://opencollective-production.s3-us-west-1.amazonaws.com/ca272d00-958a-11e7-990a-e919fb36989b.png', 
+    'https://angular.io/assets/images/logos/angular/angular.png',
+    'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/1000px-React-icon.svg.png'
+  ]
+  $scope.bae64Images = [];
+  // iterate through the image urls array and convert each image to base64
+  for(var i = 0; i<imageUrl.length; i++) {
+    getbase64Image(imageUrl[i]).then(
+      base64Image => {
+        //$log.log('Obtained data', base64Image)
+        // add the converted base64 image to array
+        $scope.bae64Images.push(base64Image);
+      }
+    )
+    console.log(imageUrl[i]);
+  }
 
   /**
    * @desc construct the pdf definition
    * @param {base64} base64Image 
    */
   function constructPDFData(base64Image) {
+    console.log($scope.bae64Images);
     docDefinition = {
       content: [
         {
@@ -51,10 +64,10 @@ function HelloController($log, $scope) {
         {
           text: 'Google image'
         },
-        // {
-        //   image: base64Image,
-        //   fit: [100, 100]
-        // }
+        {
+          image: $scope.bae64Images[0],
+          fit: [100, 100]
+        }
       ],
       styles: {
         header: {
@@ -72,6 +85,7 @@ function HelloController($log, $scope) {
     };
   }
   this.open = function () {
+    constructPDFData('');
     $log.log('Opend', $scope.baser);
     pdfMake.createPdf(docDefinition).open();
   };
@@ -80,9 +94,9 @@ function HelloController($log, $scope) {
    * get the base64 format for the imagr
    * 
    */
-  function getbase64Image() {
+  function getbase64Image(imageUrl) {
     return new Promise(function (resolve, reject) {
-      convertToDataUrl('https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Google_2015_logo.svg/1200px-Google_2015_logo.svg.png', function (base64Image) {
+      convertToDataUrl(imageUrl, function (base64Image) {
         resolve(base64Image);
       })
     })
