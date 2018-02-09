@@ -31,7 +31,7 @@ function HelloController($log, $scope) {
 
   /**
    * @desc construct the pdf definition
-   * @param {base64} base64Image 
+   * @param {Object} base64Image 
    */
   function constructPDFData(base64Image) {
     console.log($scope.bae64Images);
@@ -69,7 +69,7 @@ function HelloController($log, $scope) {
                   width: 100,
                   height: 100
                 },
-                'Vue.js', 
+                {text: 'Vue.js', alignment: 'center', color: 'green', fontsize: 15},
                 '02-09-2016', 
                 'Lin Chin', 
                 'Yes'
@@ -80,7 +80,7 @@ function HelloController($log, $scope) {
                   width: 100,
                   height: 100
                 },
-                'Angular', 
+                {text: 'Angular', alignment:'center', color:'red'},
                 '06-04-2016', 
                 'Google', 
                 'Yes'
@@ -91,7 +91,7 @@ function HelloController($log, $scope) {
                   width: 100,
                   height: 100
                 },
-                {text: 'React.js', style: 'tableHeader', alignment: 'center'},
+                {text: 'React.js', style: 'tableHeader', alignment: 'center', color: '#387EF5'},
                 '09-07-2013', 
                 'Facebook', 
                 'Yes'
@@ -120,6 +120,10 @@ function HelloController($log, $scope) {
       }
     };
   }
+
+  /**
+   * @desc Construct pdf data and open in a new window
+   */
   this.open = function () {
     constructPDFData('');
     $log.log('Opend', $scope.baser);
@@ -138,6 +142,9 @@ function HelloController($log, $scope) {
     })
   };
 
+  /**
+   * @desc download the pdf file
+   */
   this.download = function () {
     $log.log('Downloading...');
     pdfMake.createPdf(docDefinition).download('sample.pdf');
