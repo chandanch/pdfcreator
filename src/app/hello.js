@@ -22,7 +22,6 @@ function HelloController($log, $scope) {
     this.hello = imageUrl[i].name;
     getbase64Image(imageUrl[i]).then(
       base64Image => {
-        //$log.log('Obtained data', base64Image)
         // add the converted base64 image to array
         $scope.bae64Images.push(base64Image);
       }
@@ -131,7 +130,7 @@ function HelloController($log, $scope) {
   };
 
   /**
-   * get the base64 format for the image
+   * @desc get the base64 format for the image
    * 
    */
   function getbase64Image(imageUrl) {
