@@ -9,14 +9,17 @@ function HelloController($log, $scope) {
   $scope.baser = 'dddd';
   var docDefinition;
   var imageUrl = [
-    'https://www.w3schools.com/angular/pic_angular.jpg', 
-    'https://opencollective-production.s3-us-west-1.amazonaws.com/ca272d00-958a-11e7-990a-e919fb36989b.png', 
-    'https://angular.io/assets/images/logos/angular/angular.png',
-    'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/1000px-React-icon.svg.png'
+    {name: 'angularjs', url: 'https://www.w3schools.com/angular/pic_angular.jpg'},
+    {name: 'vuejs', url:'https://opencollective-production.s3-us-west-1.amazonaws.com/ca272d00-958a-11e7-990a-e919fb36989b.png'}, 
+    {name: 'angular', url:'https://angular.io/assets/images/logos/angular/angular.png',},
+    {name: 'reactjs', url:'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/1000px-React-icon.svg.png'}
   ]
+
   $scope.bae64Images = [];
   // iterate through the image urls array and convert each image to base64
   for(var i = 0; i<imageUrl.length; i++) {
+    //console.log(imageUrl[i].name);
+    this.hello = imageUrl[i].name;
     getbase64Image(imageUrl[i]).then(
       base64Image => {
         //$log.log('Obtained data', base64Image)
@@ -24,7 +27,6 @@ function HelloController($log, $scope) {
         $scope.bae64Images.push(base64Image);
       }
     )
-    console.log(imageUrl[i]);
   }
 
   /**
@@ -44,17 +46,55 @@ function HelloController($log, $scope) {
           table: {
             body: [
               [
+                {text: 'Logo',style: 'tableHeader', alignment: 'center'},
                 {text: 'Name',style: 'tableHeader', alignment: 'center'},
                 {text: 'Creation Date',style: 'tableHeader', alignment: 'center'},
                 {text: 'Creator',style: 'tableHeader', alignment: 'center'},
                 {text: 'Open Source',style: 'tableHeader', alignment: 'center'}
               ],
-              ['AngularJS', '12-03-2011', 'Google', 'Yes'],
-              ['Vue.js', '02-09-2016', 'Lin Chin', 'Yes'],
-              ['Angular', '06-04-2016', 'Google', 'Yes'],
               [
+                {
+                  image: $scope.bae64Images[0].image, 
+                  width: 100,
+                  height: 100
+                },
+                'AngularJS', 
+                '12-03-2011', 
+                'Google', 
+                'Yes'
+              ],
+              [
+                {
+                  image: $scope.bae64Images[1].image, 
+                  width: 100,
+                  height: 100
+                },
+                'Vue.js', 
+                '02-09-2016', 
+                'Lin Chin', 
+                'Yes'
+              ],
+              [
+                {
+                  image: $scope.bae64Images[2].image, 
+                  width: 100,
+                  height: 100
+                },
+                'Angular', 
+                '06-04-2016', 
+                'Google', 
+                'Yes'
+              ],
+              [
+                {
+                  image: $scope.bae64Images[3].image, 
+                  width: 100,
+                  height: 100
+                },
                 {text: 'React.js', style: 'tableHeader', alignment: 'center'},
-                '09-07-2013', 'Facebook', 'Yes'
+                '09-07-2013', 
+                'Facebook', 
+                'Yes'
               ],
             ]
           },
@@ -62,12 +102,8 @@ function HelloController($log, $scope) {
           alignment: 'center'
         },
         {
-          text: 'Google image'
+          text: ' Chandan'
         },
-        {
-          image: $scope.bae64Images[0],
-          fit: [100, 100]
-        }
       ],
       styles: {
         header: {
@@ -91,13 +127,13 @@ function HelloController($log, $scope) {
   };
 
   /**
-   * get the base64 format for the imagr
+   * get the base64 format for the image
    * 
    */
   function getbase64Image(imageUrl) {
     return new Promise(function (resolve, reject) {
-      convertToDataUrl(imageUrl, function (base64Image) {
-        resolve(base64Image);
+      convertToDataUrl(imageUrl.url, function (base64Image) {
+        resolve({name: imageUrl.name, image: base64Image});
       })
     })
   };
